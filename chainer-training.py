@@ -107,31 +107,31 @@ def main():
         valid_losses = []
         valid_accuracies = []
 
-        while True:
-            valid_batch = valid_iter.next()
-            x_valid, t_valid = chainer.dataset.concat_examples(valid_batch, gpu_id)
+        #while True:
+        #    valid_batch = valid_iter.next()
+        #    x_valid, t_valid = chainer.dataset.concat_examples(valid_batch, gpu_id)
         
         # validationデータをforward
-            with chainer.using_config("train", False), chainer.using_config("enable_backprop", False):
-                y_valid = net(x_valid)
+        #    with chainer.using_config("train", False), chainer.using_config("enable_backprop", False):
+        #        y_valid = net(x_valid)
         
             # lossを計算
-            loss_valid = F.softmax_cross_entropy(y_valid, t_valid)
-            valid_losses.append(to_cpu(loss_valid.array))
+        #    loss_valid = F.softmax_cross_entropy(y_valid, t_valid)
+        #    valid_losses.append(to_cpu(loss_valid.array))
 
 
             # 精度を計算
-            accuracy = F.accuracy(y_valid, t_valid)
-            accuracy.to_cpu()
-            valid_accuracies.append(accuracy.array)
+        #    accuracy = F.accuracy(y_valid, t_valid)
+        #    accuracy.to_cpu()
+        #    valid_accuracies.append(accuracy.array)
 
-            if valid_iter.is_new_epoch:
-                valid_iter.reset()
-                break
+        #    if valid_iter.is_new_epoch:
+        #        valid_iter.reset()
+        #        break
         
-        print("val_loss:{:.04f} val_accuracy:{:.04f}".format(
-            numpy.mean(valid_losses), numpy.mean(valid_accuracies)
-        ))
+        #print("val_loss:{:.04f} val_accuracy:{:.04f}".format(
+        #    cupy.mean(valid_losses), cupy.mean(valid_accuracies)
+        #))
 
 
     # テストデータでの評価
