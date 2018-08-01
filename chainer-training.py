@@ -82,6 +82,9 @@ def main():
 
     # 学習
     gpu_id = args.gpu
+
+    if gpu_id >= 0:
+        net.to_gpu(gpu_id)
     while train_iter.epoch < args.epoch:
         #-------------------------------
         train_batch = train_iter.next()
